@@ -12,10 +12,10 @@ app.get('/api/city/:city', async (req, res)=>{
     
     // This endpoint should call getCityInfo and getJobs and return the result as JSON.
     const cityInfo = await getCityInfo(city);
-    const jobs = getJobs(city);
+    const jobs = await getJobs(city);
 
-    // If no city info or jobs are found, the endpoint should return a 404 status
-    if (!cityInfo || jobs === {}){
+    // If no city info and jobs are found, the endpoint should return a 404 status
+    if (!cityInfo && ! jobs){
         return res.status(404).send({error: 'No results found'})
     } 
     
